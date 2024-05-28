@@ -1,0 +1,12 @@
+body {
+  background-color: rgb(41, 41, 41);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: top;
+  gap: 10px; /* Adjust gap between items as needed */
+}
