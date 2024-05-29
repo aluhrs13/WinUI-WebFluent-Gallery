@@ -14,7 +14,12 @@ export class StackPanel extends Component {
       flexWrap: "wrap",
       justifyContent: "flex-start",
       alignItems: "top",
-      gap: "10px",
+      gap: "16px",
+    },
+    column: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "top",
     },
   });
 
@@ -24,7 +29,7 @@ export class StackPanel extends Component {
     if (this.props.Orientation === "Horizontal") {
       return <div className={classes.row}>{this.props.children}</div>;
     } else {
-      return <div>{this.props.children}</div>;
+      return <div className={classes.column}>{this.props.children}</div>;
     }
   }
 }

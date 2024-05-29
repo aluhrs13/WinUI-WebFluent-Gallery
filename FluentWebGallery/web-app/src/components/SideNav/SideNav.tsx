@@ -7,12 +7,29 @@ import {
   NavSubItemGroup,
 } from "@fluentui/react-nav-preview";
 
+import { makeStyles, shorthands } from "@fluentui/react-components";
+
+import { SearchBox } from "@fluentui/react-components";
+import { NavigationRegular } from "@fluentui/react-icons";
+
 import "./style.css";
 
+const useClasses = makeStyles({
+  icon24: { fontSize: "24px", margin: "8px" },
+});
+
 export function SideNav() {
+  const classes = useClasses();
+
   return (
-    <div id="Nav" style="width:320px">
+    <div
+      id="Nav"
+      style="width:320px; min-width:320px; height:100%; background-color: black;"
+    >
       <Nav multiple={true}>
+        <NavigationRegular className={classes.icon24} />
+        <SearchBox placeholder="Search" style="margin:8px" />
+
         <NavCategory value="Design_Guidance">
           <NavCategoryItem> Design guidance</NavCategoryItem>
           <NavSubItemGroup>

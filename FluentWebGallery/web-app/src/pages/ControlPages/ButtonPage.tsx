@@ -10,6 +10,8 @@ import { Button } from "@fluentui/react-components";
 import { Text } from "@fluentui/react-components";
 import { Image } from "@fluentui/react-components";
 
+import { makeStyles, tokens, mergeClasses } from "@fluentui/react-components";
+
 export class ButtonPage extends Component {
   constructor() {
     super();
@@ -20,14 +22,43 @@ export class ButtonPage extends Component {
 
   componentWillUnmount() {}
 
+  useStyles = makeStyles({
+    root: { margin: "16px", padding: "16px" },
+    nestedBg: {
+      backgroundColor: tokens.colorNeutralBackground2,
+    },
+    row: {
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "flex-start",
+      alignItems: "top",
+      gap: "16px",
+    },
+
+    output: {},
+    example: {
+      display: "flex",
+      flexDirection: "row",
+      gap: "16px",
+    },
+    options: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "8px",
+    },
+  });
+
   render() {
+    const classes = this.useStyles();
+
     return (
       <StackPanel>
         <ControlExample
           Name="Example1"
           HeaderText="A simple Button with text content."
         >
-          <div class="Example">
+          <div className={classes.example}>
             <ProxyButton
               Name="Button1"
               Content="Standard XAML button"
@@ -36,13 +67,13 @@ export class ButtonPage extends Component {
               IsEnabled="{x:Bind DisableButton1.IsChecked.Value.Equals(x:False), Mode=OneWay}"
             />
           </div>
-          <div class="Output">
+          <div className={classes.output}>
             <ProxyText
               Name="Control1Output"
               FontFamily="Global User Interface"
             />
           </div>
-          <div class="Options">
+          <div className={classes.options}>
             <StackPanel>
               <ProxyCheckBox Name="DisableButton1" Content="Disable button" />
             </StackPanel>
@@ -53,7 +84,7 @@ export class ButtonPage extends Component {
           Name="Example2"
           HeaderText="A Button with graphical content."
         >
-          <div class="Example">
+          <div className={classes.example}>
             <StackPanel Orientation="Horizontal">
               <ProxyButton
                 Name="Button2"
@@ -66,7 +97,7 @@ export class ButtonPage extends Component {
               </ProxyButton>
             </StackPanel>
           </div>
-          <div class="Output">
+          <div className={classes.output}>
             <ProxyText Name="Control2Output" />
           </div>
         </ControlExample>
@@ -111,7 +142,7 @@ export class ButtonPage extends Component {
         </ControlExample>
 
         <ControlExample HeaderText="Accent style applied to Button.">
-          <div class="Example">
+          <div className={classes.example}>
             <ProxyButton
               Style="{StaticResource AccentButtonStyle}"
               Content="Accent style button"

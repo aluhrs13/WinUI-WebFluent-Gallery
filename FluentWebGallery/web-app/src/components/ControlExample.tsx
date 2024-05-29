@@ -1,6 +1,6 @@
 import { Fragment, Component, render } from "preact";
-
-import { makeStyles } from "@fluentui/react-components";
+import { ProxyText } from "./Proxies/ProxyText";
+import { makeStyles, tokens, mergeClasses } from "@fluentui/react-components";
 
 export class ControlExample extends Component {
   constructor() {
@@ -8,13 +8,24 @@ export class ControlExample extends Component {
   }
 
   useStyles = makeStyles({
+    root: { marginTop: "24px" },
+    nestedBg: {
+      backgroundColor: tokens.colorNeutralBackground2,
+    },
     row: {
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
-      justifyContent: "flex-start",
+      justifyContent: "space-between",
       alignItems: "top",
-      gap: "10px",
+      gap: "24px",
+      padding: "16px",
+      borderRadius: "8px",
+    },
+    header: {
+      padding: "16px",
+      fontSize: "24px",
+      fontWeight: "bold",
     },
   });
 
@@ -22,9 +33,11 @@ export class ControlExample extends Component {
     const classes = this.useStyles();
 
     return (
-      <div>
-        <h1>{this.props.HeaderText}</h1>
-        <div className={classes.row}>{this.props.children}</div>
+      <div className={classes.root}>
+        <ProxyText Text={this.props.HeaderText} Margin="0,0,0,8" />
+        <div className={mergeClasses(classes.nestedBg, classes.row)}>
+          {this.props.children}
+        </div>
       </div>
     );
   }
