@@ -1,7 +1,7 @@
 import { Fragment, Component, render } from "preact";
-import { Checkbox } from "@fluentui/react-components";
+import { CompoundButton } from "@fluentui/react-components";
 
-export class ProxyCheckBox extends Component {
+export class ProxyAppbarButton extends Component {
   constructor() {
     super();
   }
@@ -9,7 +9,7 @@ export class ProxyCheckBox extends Component {
   render() {
     return (
       <Fragment>
-        <Checkbox />
+        <CompoundButton />
       </Fragment>
     );
   }
