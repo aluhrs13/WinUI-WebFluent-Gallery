@@ -7,6 +7,7 @@ ELEMENT_MAPPING = {
     'Image': {'new_tag': 'ProxyImage', 'attributes': {}},
     'ComboBox': {'new_tag': 'ProxyComboBox', 'attributes': {}},
     'Rectangle': {'new_tag': 'ProxyRectangle', 'attributes': {}},
+    'CalendarDatePicker': {'new_tag': 'ProxyDatePicker', 'attributes': {}},
 
     'ControlExample': {'new_tag': 'ControlExample', 'attributes': {}},
 
@@ -45,6 +46,9 @@ HANDLED_ATTRIBUTES = [
     "ProxyCheckBox",
     "ProxyCheckBox.Content",
     "ProxyCheckBox.aria-label",
+    "ProxyDatePicker",
+    "ProxyDatePicker.Header",
+    "ProxyDatePicker.PlaceholderText",
     "ProxyImage",
     "ProxyImage.Source",
     "ProxyImage.aria-label",
@@ -106,18 +110,20 @@ IGNORED_ATTRIBUTES = [
     "ProxyText.FontSize",
 ]
 
+proxies = set()
+
 import os
 from lxml import etree
+from jinja2 import Environment, FileSystemLoader
 
 def read_xaml_file(file_path):
     """Read the content of a XAML file."""
+    file_path = os.path.join("Q:\\WinUI-WebFluent-Gallery\\WinUIGallery\\ControlPages\\", file_path)
     with open(file_path, 'r', encoding="utf-8") as file:
         return file.read()
 
 def parse_xaml_content(xaml_content):
     """Parse the XAML content into a data structure."""
-    print(xaml_content)
-
     return etree.fromstring(xaml_content)
 
 def remove_comments(element):
@@ -180,15 +186,35 @@ def write_output_file(output_path, content):
         lines = lines[1:]
         lines[0] = "<div class='page'>"
     modified_content = '\n'.join(lines)
-    
+
+    # Load the template
+    file_loader = FileSystemLoader('templates')
+    env = Environment(loader=file_loader)
+    template = env.get_template('page.jinja2')
+
+    # Data to render the template with
+    data = {
+        'pageName': output_path,
+        'html': modified_content,
+        'proxies': proxies
+    }
+
+    # Render the template
+    output = template.render(data)
+    output_path = "Q:\\WinUI-WebFluent-Gallery\\FluentWebGallery\\web-app\\src\\pages\\ControlPages\\"+output_path+".tsx"
+
     with open(output_path, 'w') as file:
-        file.write(modified_content)
+        file.write(output)
 
 def print_tag_and_attribute_combos(root):
     """Print all unique tag and attribute combinations in the XAML file."""
     tag_attr_combos = set()
     for element in root.iter():
         tag_name = etree.QName(element).localname
+
+        if "Proxy" in tag_name:
+            proxies.add(tag_name)
+
         if tag_name not in HANDLED_ATTRIBUTES and tag_name not in IGNORED_ATTRIBUTES:
             tag_attr_combos.add(tag_name)
         for attr in element.attrib:
@@ -226,7 +252,8 @@ def main(input_file):
     print_tag_and_attribute_combos(root)
     
     # Determine output file path
-    output_file = os.path.splitext(input_file)[0] + '.html'
+    output_file = input_file.split("\\")[-1]
+    output_file = os.path.splitext(output_file)[0]
     
     # Step 7: Write Output HTML File
     write_output_file(output_file, modified_content)
@@ -234,6 +261,6 @@ def main(input_file):
     print(f"Modified content has been written to {output_file}")
 
 if __name__ == "__main__":
-    #input_file = "ButtonPage.xaml"
-    input_file = input("Enter the path of the XAML file: ")
+    input_file = "CalendarDatePickerPage.xaml"
+    #input_file = input("Enter the path of the XAML file: ")
     main(input_file)

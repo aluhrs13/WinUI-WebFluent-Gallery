@@ -8,6 +8,7 @@
 	},
 	"dependencies": {
 		"@fluentui/react-components": "^9.53.0",
+		"@fluentui/react-datepicker-compat": "^0.4.40",
 		"@fluentui/react-nav-preview": "^0.2.1",
 		"preact": "^10.20.0",
 		"preact-iso": "^2.6.2",

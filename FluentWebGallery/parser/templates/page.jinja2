@@ -1,0 +1,27 @@
+import { Component, render } from "preact";
+import { makeStyles, tokens, mergeClasses } from "@fluentui/react-components";
+
+import { StackPanel } from "../../components/StackPanel";
+import { ControlExample } from "../../components/ControlExample";
+
+{% for proxy in proxies %}import { {{proxy }} } from "../../components/Proxies/{{ proxy }}";
+{% endfor %}
+
+export class {{ pageName }} extends Component {
+  constructor() {
+    super();
+    this.state = { key: "Value" };
+  }
+
+  componentDidMount() {}
+
+  componentWillUnmount() {}
+
+  useStyles = makeStyles({});
+
+  render() {
+    const classes = this.useStyles();
+
+    return ({{ html }});
+  }
+}
