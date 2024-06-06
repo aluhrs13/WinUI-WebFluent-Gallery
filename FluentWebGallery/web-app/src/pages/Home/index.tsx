@@ -1,6 +1,6 @@
-import { SideNav } from "../../components/SideNav/SideNav";
+import { SideNav } from "../../components/GeneratedComponents/SideNav";
 import { StackPanel } from "../../components/StackPanel";
-import { ButtonPage } from "../ControlPages/ButtonPage";
+import { ButtonPage } from "../GeneratedPages/ButtonPage";
 import "./style.css";
 
 export function Home() {

@@ -118,7 +118,7 @@ from jinja2 import Environment, FileSystemLoader
 
 def read_xaml_file(file_path):
     """Read the content of a XAML file."""
-    file_path = os.path.join("Q:\\WinUI-WebFluent-Gallery\\WinUIGallery\\ControlPages\\", file_path)
+    file_path = os.path.join("..\\..\\WinUIGallery\\ControlPages\\", file_path)
     with open(file_path, 'r', encoding="utf-8") as file:
         return file.read()
 
@@ -201,7 +201,7 @@ def write_output_file(output_path, content):
 
     # Render the template
     output = template.render(data)
-    output_path = "Q:\\WinUI-WebFluent-Gallery\\FluentWebGallery\\web-app\\src\\pages\\ControlPages\\"+output_path+".tsx"
+    output_path = "..\\web-app\\src\\pages\\GeneratedPages\\"+output_path+".tsx"
 
     with open(output_path, 'w') as file:
         file.write(output)

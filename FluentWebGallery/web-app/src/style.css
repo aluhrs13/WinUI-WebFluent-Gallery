@@ -10,3 +10,10 @@ body {
   align-items: top;
   gap: 10px; /* Adjust gap between items as needed */
 }
+
+#sideNav{
+  width:320px;
+  min-width:320px;
+  height:100%;
+  background-color: black;
+}

@@ -1,0 +1,33 @@
+import {
+  Nav,
+  NavCategory,
+  NavCategoryItem,
+  NavItem,
+  NavSubItem,
+  NavSubItemGroup,
+} from "@fluentui/react-nav-preview";
+
+import { makeStyles, shorthands } from "@fluentui/react-components";
+import { SearchBox } from "@fluentui/react-components";
+import { NavigationRegular } from "@fluentui/react-icons";
+
+const useClasses = makeStyles({
+  icon24: { fontSize: "24px", margin: "8px" },
+});
+
+export function SideNav() {
+  const classes = useClasses();
+
+  return (
+    <div
+      id="sideNav"
+    >
+      <Nav multiple={true}>
+        <NavigationRegular className={classes.icon24} />
+        <SearchBox placeholder="Search" style="margin:8px" />
+
+        {{ html }}
+      </Nav>
+    </div>
+  );
+}
