@@ -1,0 +1,40 @@
+import {
+  LocationProvider,
+  Router,
+  Route,
+  hydrate,
+  prerender as ssr,
+} from "preact-iso";
+
+import { FluentProvider, webDarkTheme } from "@fluentui/react-components";
+
+import { Home } from "./pages/Home/index.jsx";
+
+{% for page in pages %}import { {{page}}Page } from "./pages/GeneratedPages/{{ page }}Page";
+{% endfor %}
+
+import "./style.css";
+
+export function App() {
+  return (
+    <LocationProvider>
+      <FluentProvider theme={webDarkTheme}>
+        <main>
+          <Router>
+            <Route Default path="/" component={Home} />
+            {% for page in pages %}<Route Default path="/{{ page }}Page" component={ {{ page }}Page } />
+            {% endfor %}
+          </Router>
+        </main>
+      </FluentProvider>
+    </LocationProvider>
+  );
+}
+
+if (typeof window !== "undefined") {
+  hydrate(<App />, document.getElementById("app"));
+}
+
+export async function prerender(data) {
+  return await ssr(<App {...data} />);
+}

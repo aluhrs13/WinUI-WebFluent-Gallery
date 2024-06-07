@@ -3,6 +3,7 @@ from jinja2 import Environment, FileSystemLoader
 
 import control_page
 
+items = []
 
 def create_tsx_page(name):
     control_page.main(name+"Page.xaml")
@@ -28,13 +29,18 @@ def json_to_html(data_array):
         for item in data["Items"]:
             item_icon_glyph = item.get("IconGlyph", "")
             item_title_with_icon = f'{item_icon_glyph} {item["Title"]}' if item_icon_glyph else item["Title"]
-            html_output.append(f'        <NavSubItem value="{item["UniqueId"]}">{item_title_with_icon}</NavSubItem>')
+            html_output.append(f'        <NavSubItem href="{item["UniqueId"]}Page" value="{item["UniqueId"]}">{item_title_with_icon}</NavSubItem>')
             create_tsx_page(item["UniqueId"])
+            items.append(item["UniqueId"])
 
         html_output.append('    </NavSubItemGroup>')
         html_output.append('</NavCategory>')
 
     return "\n".join(html_output)
+
+# Open the file again in write mode and write the set back to it
+with open('output.txt', 'w') as f:
+    f.write("")
 
 # Load JSON from file
 filename = '..\\..\\WinUIGallery\\DataModel\\ControlInfoData.json'
@@ -62,6 +68,21 @@ with open(output_path, 'w', encoding='utf-8') as file:
     file.write(output)
 
 
+template2 = env.get_template('index.jinja2')
+
+# Data to render the template with
+data2 = {
+    'pages': items,
+}
+
+# Render the template
+output2 = template2.render(data2)
+output_path2 = "..\\web-app\\src\\index.tsx"
+
+with open(output_path2, 'w', encoding='utf-8') as file:
+    file.write(output2)
+
+
 # Open the file and read the lines into a set
 with open('output.txt', 'r') as f:
     lines = set(f.readlines())
@@ -70,3 +91,4 @@ with open('output.txt', 'r') as f:
 with open('output.txt', 'w') as f:
     for line in sorted(list(lines)):
         f.write(line)
+
