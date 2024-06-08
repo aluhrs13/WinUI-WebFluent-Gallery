@@ -1,6 +1,7 @@
 import { Component, render } from "preact";
 import { makeStyles, tokens, mergeClasses } from "@fluentui/react-components";
 
+import { SideNav } from "../../components/GeneratedComponents/SideNav";
 import { StackPanel } from "../../components/StackPanel";
 import { ControlExample } from "../../components/ControlExample";
 
@@ -22,6 +23,9 @@ export class {{ pageName }} extends Component {
   render() {
     const classes = this.useStyles();
 
-    return ({{ html }});
+    return <div class="row">
+    <SideNav />
+    {{ html }}
+    </div>;
   }
 }
