@@ -2,6 +2,16 @@ import { Fragment, Component, render } from "preact";
 import { ProxyText } from "./Proxies/ProxyText";
 import { makeStyles, tokens, mergeClasses } from "@fluentui/react-components";
 
+/*
+"ControlExample.CSharpSource",
+"ControlExample.FontFamily",
+"ControlExample.HorizontalContentAlignment",
+"ControlExample.Loaded",
+"ControlExample.Margin",
+"ControlExample.VerticalAlignment",
+"ControlExample.WebViewHeight",
+"ControlExample.XamlSource",
+*/
 export class ControlExample extends Component {
   constructor() {
     super();

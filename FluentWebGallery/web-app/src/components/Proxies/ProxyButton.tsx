@@ -3,6 +3,17 @@ import { Button } from "@fluentui/react-components";
 
 import { translateMargin } from "../../utils";
 
+/*
+"ProxyButton.ContextRequested",
+"ProxyButton.Grid.Column",
+"ProxyButton.HorizontalContentAlignment",
+"ProxyButton.Padding",
+"ProxyButton.RelativePanel.LeftOf",
+"ProxyButton.RelativePanel.RightOf",
+"ProxyButton.ToolTipService.ToolTip",
+"ProxyButton.Uid",
+"ProxyButton.VerticalContentAlignment",
+*/
 export class ProxyButton extends Component {
   constructor() {
     super();

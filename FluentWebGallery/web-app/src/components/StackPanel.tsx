@@ -2,6 +2,16 @@ import { Fragment, Component, render } from "preact";
 
 import { makeStyles } from "@fluentui/react-components";
 
+/*
+"StackPanel.Margin",
+"StackPanel.RelativePanel.AlignLeftWith",
+"StackPanel.RelativePanelBelow",
+"StackPanel.Spacing",
+"StackPanel.VerticalAlignment",
+"StackPanel.Visibility",
+"StackPanel.Width",
+"StackPanel.aria-label",
+*/
 export class StackPanel extends Component {
   constructor() {
     super();
